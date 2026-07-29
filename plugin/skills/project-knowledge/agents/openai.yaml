@@ -1,0 +1,4 @@
+interface:
+  display_name: "Project Knowledge"
+  short_description: "Curate project wiki, state, and durable decisions"
+  default_prompt: "Use $project-knowledge to promote these findings into the project wiki."

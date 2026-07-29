@@ -1,0 +1,103 @@
+{
+  "description": "Initialize bounded project memory and archive each completed turn.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact|fork",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/harness.py",
+            "args": [
+              "session-start",
+              "--project",
+              "${CLAUDE_PROJECT_DIR}",
+              "--data",
+              "~/.claude/personal-harness-data",
+              "--templates",
+              "${CLAUDE_PLUGIN_ROOT}/templates"
+            ],
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/harness.py",
+            "args": [
+              "prompt",
+              "--project",
+              "${CLAUDE_PROJECT_DIR}",
+              "--data",
+              "~/.claude/personal-harness-data",
+              "--templates",
+              "${CLAUDE_PLUGIN_ROOT}/templates"
+            ],
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Read|Glob|Grep|Write|Edit|NotebookEdit|Bash|PowerShell|Agent|Task|Skill|WebSearch|WebFetch|mcp__.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/harness.py",
+            "args": [
+              "tool",
+              "--project",
+              "${CLAUDE_PROJECT_DIR}",
+              "--data",
+              "~/.claude/personal-harness-data"
+            ],
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/harness.py",
+            "args": [
+              "stop",
+              "--project",
+              "${CLAUDE_PROJECT_DIR}",
+              "--data",
+              "~/.claude/personal-harness-data",
+              "--templates",
+              "${CLAUDE_PLUGIN_ROOT}/templates"
+            ],
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/harness.py",
+            "args": [
+              "session-end",
+              "--project",
+              "${CLAUDE_PROJECT_DIR}",
+              "--data",
+              "~/.claude/personal-harness-data"
+            ],
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

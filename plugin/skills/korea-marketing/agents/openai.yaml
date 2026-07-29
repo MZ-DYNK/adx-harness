@@ -1,0 +1,4 @@
+interface:
+  display_name: "Korea Marketing"
+  short_description: "Plan integrated marketing for the Korean market"
+  default_prompt: "Use $korea-marketing to turn this brief into a Korean market plan."

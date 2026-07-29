@@ -1,0 +1,4 @@
+interface:
+  display_name: "Frontend Ideation"
+  short_description: "Create UI directions and grow a design archive"
+  default_prompt: "Use $frontend-ideation to propose distinct UI directions for this product."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Reconcile Marketing Decision"
+  short_description: "Resolve stakeholder input into accountable decisions"
+  default_prompt: "Use $reconcile-marketing-decision to reconcile these stakeholder messages into decisions and actions."

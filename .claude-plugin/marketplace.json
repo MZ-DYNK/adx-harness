@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "adx",
+  "owner": {
+    "name": "ADX"
+  },
+  "metadata": {
+    "description": "ADX 팀용 Claude Code 하네스 카탈로그입니다."
+  },
+  "plugins": [
+    {
+      "name": "adx-harness",
+      "source": "./plugin",
+      "description": "개발·기획·마케팅·문서·프론트 디자인을 같은 기억과 판단 기준으로 잇는 크로스펑셔널 운영 계층. 훅이 기억과 라우팅과 정리를 자동으로 처리합니다."
+    }
+  ]
+}

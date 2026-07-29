@@ -1,0 +1,4 @@
+interface:
+  display_name: "Plan Marketing Experiment"
+  short_description: "Turn creative signals into testable experiments"
+  default_prompt: "Use $plan-marketing-experiment to turn these campaign results into a focused experiment plan."

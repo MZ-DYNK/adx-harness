@@ -1,0 +1,12 @@
+#!/bin/sh
+# One entry point for harness maintenance from the repository root.
+#
+#   ./harness status     한 화면 상태 (설치·점검·라우팅 점수·오늘 기록)
+#   ./harness digest     오늘 작업 정리 서머리
+#   ./harness doctor     구조·권한·인덱스 점검
+#   ./harness search --query "..."   지식 검색
+#
+# Daily use needs none of this: the lifecycle hooks run on their own.
+set -e
+root=$(cd "$(dirname "$0")" && pwd)
+exec python3 "$root/plugin/scripts/harness.py" "$@"

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "adx-harness",
+  "displayName": "ADX Harness",
+  "version": "0.1.0",
+  "description": "개발·기획·PM/PO·마케팅·문서·프론트 디자인을 같은 기억과 판단 기준으로 잇는 Claude Code 운영 계층입니다. 프로젝트별 지식 정본, 턴 자동 기록, 하루 정리 서머리, 정확도 우선 스킬 라우팅, 한국 시장 마케팅 방법론을 포함합니다.",
+  "author": {
+    "name": "Private personal workspace"
+  },
+  "keywords": [
+    "personal-assistant",
+    "marketing",
+    "design",
+    "knowledge",
+    "archive"
+  ]
+}

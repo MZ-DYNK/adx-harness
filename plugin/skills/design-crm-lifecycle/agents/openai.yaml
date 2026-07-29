@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design CRM Lifecycle"
+  short_description: "Design measurable CRM lifecycle programs"
+  default_prompt: "Use $design-crm-lifecycle to design a measurable lifecycle program for this customer journey."

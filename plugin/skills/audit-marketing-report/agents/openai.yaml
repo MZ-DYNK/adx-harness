@@ -1,0 +1,4 @@
+interface:
+  display_name: "Audit Marketing Report"
+  short_description: "Turn performance reports into evidence-backed actions"
+  default_prompt: "Use $audit-marketing-report to audit this performance report and recommend the next action."

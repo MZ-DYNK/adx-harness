@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+
+# 프로젝트 상태와 제한 원본은 배포도 버전 관리도 하지 않습니다.
+# `.harness/.gitignore` 와 중복이지만, 저장소를 재구성해도 남도록 여기에도 둡니다.
+.harness/NOW.md
+.harness/logs/
+.harness/imports/
+.harness/.index/
+
+# 실사용 라벨에는 프로젝트·클라이언트 이름이 들어 있습니다.
+# 플러그인을 공개 배포할 때는 이 디렉터리를 함께 올리지 않습니다.
+# 개인 private 저장소에서만 추적하세요.

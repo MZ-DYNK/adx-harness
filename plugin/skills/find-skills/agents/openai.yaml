@@ -1,0 +1,4 @@
+interface:
+  display_name: "Find Skills"
+  short_description: "Find and vet the smallest fitting agent skill"
+  default_prompt: "Use $find-skills to find a safe skill for this recurring task."

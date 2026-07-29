@@ -1,0 +1,4 @@
+interface:
+  display_name: "Adaptive Writing"
+  short_description: "Match the user’s level and write concise Markdown"
+  default_prompt: "Use $adaptive-writing to rewrite this for my working level."

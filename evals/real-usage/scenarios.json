@@ -1,0 +1,695 @@
+{
+  "version": 1,
+  "note": "실사용 관측용 라우팅 시나리오. 사용자의 실제 업무 맥락(Wonder, TEAZEN, T'Ways, 신한 파일럿, Tingle, 대행사 커뮤니케이션, 문서, 프론트, 하네스 운영)에서 저자가 부여한 기대 라벨이며, 사용자 정정이 최우선 근거입니다. 클라이언트 수치는 담지 않습니다.",
+  "fields": {
+    "expect": "반드시 선택되어야 하는 스킬",
+    "accept": "선택되어도 오탐으로 세지 않는 대안 스킬",
+    "forbid": "선택되면 안 되는 스킬",
+    "mode": "route 또는 abstain"
+  },
+  "scenarios": [
+    {
+      "id": "wonder-pacing-vs-kpi",
+      "source": "Wonder 퍼포먼스 운영",
+      "prompt": "원더 7월 데일리 리포트 보니까 예산 소진율은 계획보다 빠른데 시험신청은 목표에 못 미쳐. 감액해야 하나?",
+      "expect": ["audit-marketing-report"],
+      "forbid": ["frontend-ideation", "adaptive-writing"]
+    },
+    {
+      "id": "wonder-channel-cpa-gap",
+      "source": "Wonder 퍼포먼스 운영",
+      "prompt": "구글하고 당근 CPA 차이가 두 배 넘게 벌어졌어. 예산 재배분 의견 줘.",
+      "expect": ["audit-marketing-report"],
+      "forbid": ["korea-marketing"]
+    },
+    {
+      "id": "wonder-platform-vs-firstparty",
+      "source": "Wonder 퍼포먼스 운영",
+      "prompt": "플랫폼 전환 수는 늘었는데 위촉이랑 가동은 그대로야. 매체 성과랑 내부 DB를 어떻게 갈라서 봐야 해?",
+      "expect": ["audit-marketing-report"],
+      "accept": ["design-crm-lifecycle"],
+      "forbid": ["frontend-ideation"]
+    },
+    {
+      "id": "agency-vs-inhouse-numbers",
+      "source": "Wonder 퍼포먼스 운영",
+      "prompt": "대행사 리포트 전환 수랑 인하우스 DB 수가 안 맞아. 뭐부터 확인해야 하는지 진단해줘.",
+      "expect": ["audit-marketing-report"],
+      "accept": ["reconcile-marketing-decision"],
+      "forbid": ["adaptive-writing"]
+    },
+    {
+      "id": "teazen-roas-drop",
+      "source": "TEAZEN 커머스·검색",
+      "prompt": "티젠 협력광고 리포트에서 ROAS가 전월보다 떨어졌어. 왜 떨어졌는지 분석해줘.",
+      "expect": ["audit-marketing-report"],
+      "forbid": ["korea-marketing"]
+    },
+    {
+      "id": "monthly-restatement-check",
+      "source": "Wonder 퍼포먼스 운영",
+      "prompt": "지난달 월간 리포트랑 이번 파일의 같은 KPI 값이 달라. restatement 어떻게 표기하고 판단해야 해?",
+      "expect": ["audit-marketing-report"],
+      "accept": ["project-knowledge"],
+      "forbid": ["adaptive-writing"]
+    },
+    {
+      "id": "weekly-report-audit-en",
+      "source": "TEAZEN 커머스·검색",
+      "prompt": "Audit this weekly performance report for cost basis and attribution gaps before I reply to the advertiser.",
+      "expect": ["audit-marketing-report"],
+      "forbid": ["adaptive-writing"]
+    },
+    {
+      "id": "wonder-next-creative-test",
+      "source": "Wonder 소재·메시지라인",
+      "prompt": "27일자 고효율 소재 정리한 거 기준으로 다음 주에 어떤 광고 소재부터 테스트할지 정해줘.",
+      "expect": ["plan-marketing-experiment"],
+      "forbid": ["frontend-ideation"]
+    },
+    {
+      "id": "wonder-messageline-hypothesis",
+      "source": "Wonder 소재·메시지라인",
+      "prompt": "메시지라인별 위닝 요소 뽑아서 신규 유입용 메시지 가설로 정리해줘.",
+      "expect": ["plan-marketing-experiment"],
+      "forbid": ["adaptive-writing"]
+    },
+    {
+      "id": "creative-fatigue-rotation",
+      "source": "Wonder 소재·메시지라인",
+      "prompt": "소재 피로도 온 것 같은데 크리에이티브 로테이션 어떻게 설계할까.",
+      "expect": ["plan-marketing-experiment"],
+      "forbid": ["frontend-ideation"]
+    },
+    {
+      "id": "landing-copy-ab-test",
+      "source": "Wonder 소재·메시지라인",
+      "prompt": "랜딩 카피 A/B 테스트 설계해줘. 가드레일 지표까지 같이.",
+      "expect": ["plan-marketing-experiment"],
+      "forbid": ["frontend-ideation"]
+    },
+    {
+      "id": "reengage-vs-new-creative",
+      "source": "Wonder 소재·메시지라인",
+      "prompt": "리인게이지용 소재랑 신규 유입용 소재를 분리해서 다음 테스트 설계해줘.",
+      "expect": ["plan-marketing-experiment"],
+      "forbid": ["design-crm-lifecycle"]
+    },
+    {
+      "id": "wonder-exam-nudge-crm",
+      "source": "Wonder 모집 퍼널 CRM",
+      "prompt": "시험신청만 하고 응시 안 한 대상한테 보낼 카카오 메시지 시나리오 짜줘.",
+      "expect": ["design-crm-lifecycle"],
+      "forbid": ["plan-marketing-experiment"]
+    },
+    {
+      "id": "wonder-appointment-dropoff",
+      "source": "Wonder 모집 퍼널 CRM",
+      "prompt": "합격했는데 위촉까지 안 가는 구간 이탈이 커. 리텐션 관점으로 진단해줘.",
+      "expect": ["design-crm-lifecycle"],
+      "accept": ["audit-marketing-report"],
+      "forbid": ["frontend-ideation"]
+    },
+    {
+      "id": "tways-followup-crm",
+      "source": "T'Ways 캠페인 후속",
+      "prompt": "참여 캠페인 결과로 회원 매칭된 세그먼트에 보낼 후속 CRM 시나리오랑 리타기팅 설계해줘.",
+      "expect": ["design-crm-lifecycle"],
+      "accept": ["plan-marketing-experiment"],
+      "forbid": ["adaptive-writing"]
+    },
+    {
+      "id": "dormant-winback",
+      "source": "T'Ways 캠페인 후속",
+      "prompt": "휴면 고객 윈백 시나리오랑 수신 동의 조건 정리해줘.",
+      "expect": ["design-crm-lifecycle"],
+      "forbid": ["project-knowledge"]
+    },
+    {
+      "id": "onboarding-holdout",
+      "source": "Wonder 모집 퍼널 CRM",
+      "prompt": "가입 후 핵심 행동까지 가는 온보딩 메시지 설계하고 holdout 기준도 잡아줘.",
+      "expect": ["design-crm-lifecycle"],
+      "forbid": ["plan-marketing-experiment"]
+    },
+    {
+      "id": "teazen-season-strategy",
+      "source": "TEAZEN 커머스·검색",
+      "prompt": "티젠 여름 시즌 마케팅 전략을 기획해줘. 브랜드 검색 수요랑 브랜드스토어 매출 연결까지 봐서.",
+      "expect": ["korea-marketing"],
+      "accept": ["audit-marketing-report"],
+      "forbid": ["frontend-ideation"]
+    },
+    {
+      "id": "tingle-launch-positioning",
+      "source": "Tingle 론칭 전략",
+      "prompt": "Tingle 론칭 전략 짜야 해. 타깃 세그먼트 나누고 포지셔닝부터 정의해줘.",
+      "expect": ["korea-marketing"],
+      "forbid": ["frontend-ideation", "adaptive-writing"]
+    },
+    {
+      "id": "shinhan-channel-strategy",
+      "source": "신한 예금토큰 파일럿",
+      "prompt": "예금토큰 파일럿 제안에서 채널 전략이랑 매체 믹스 방향 잡아줘.",
+      "expect": ["korea-marketing"],
+      "accept": ["audit-marketing-report"],
+      "forbid": ["adaptive-writing"]
+    },
+    {
+      "id": "subculture-brand-voice",
+      "source": "Tingle 론칭 전략",
+      "prompt": "여성향 서브컬처 타깃 브랜드 포지셔닝을 소비자 언어로 정의해줘.",
+      "expect": ["korea-marketing"],
+      "forbid": ["adaptive-writing"]
+    },
+    {
+      "id": "new-product-campaign-strategy",
+      "source": "TEAZEN 커머스·검색",
+      "prompt": "신제품 캠페인 전략을 STP랑 4P로 정리해줘.",
+      "expect": ["korea-marketing"],
+      "forbid": ["adaptive-writing"]
+    },
+    {
+      "id": "slack-conflict-owner",
+      "source": "대행사·광고주 커뮤니케이션",
+      "prompt": "어제 슬랙에서 광고주랑 대행사 의견이 갈렸어. 결정 사항이랑 담당자 정리해줘.",
+      "expect": ["reconcile-marketing-decision"],
+      "forbid": ["adaptive-writing"]
+    },
+    {
+      "id": "meeting-action-items",
+      "source": "대행사·광고주 커뮤니케이션",
+      "prompt": "회의에서 나온 액션 아이템 정리하고 담당자와 기한 붙여줘.",
+      "expect": ["reconcile-marketing-decision"],
+      "forbid": ["project-knowledge"]
+    },
+    {
+      "id": "advertiser-feedback-decision-log",
+      "source": "대행사·광고주 커뮤니케이션",
+      "prompt": "메일로 온 광고주 피드백 반영해서 결정 로그로 만들어줘.",
+      "expect": ["reconcile-marketing-decision"],
+      "accept": ["project-knowledge"],
+      "forbid": ["adaptive-writing"]
+    },
+    {
+      "id": "creative-handover-approval",
+      "source": "대행사·광고주 커뮤니케이션",
+      "prompt": "계약 종료 전에 소재 인수인계 담당하고 승인 사항 정리해줘.",
+      "expect": ["reconcile-marketing-decision"],
+      "forbid": ["plan-marketing-experiment"]
+    },
+    {
+      "id": "advertiser-mail-polish",
+      "source": "문서·보고",
+      "prompt": "광고주한테 보낼 메일인데 내 문체는 유지하고 문장만 다듬어줘.",
+      "expect": ["adaptive-writing"],
+      "forbid": ["reconcile-marketing-decision"]
+    },
+    {
+      "id": "one-pager-for-exec",
+      "source": "문서·보고",
+      "prompt": "이 내용을 대표가 1분 안에 읽을 수 있게 한 페이지 문서로 요약해줘.",
+      "expect": ["adaptive-writing"],
+      "forbid": ["audit-marketing-report"]
+    },
+    {
+      "id": "proposal-proofread",
+      "source": "문서·보고",
+      "prompt": "제안서 초안 오탈자랑 톤 교정해줘.",
+      "expect": ["adaptive-writing"],
+      "forbid": ["korea-marketing"]
+    },
+    {
+      "id": "exec-memo-en",
+      "source": "문서·보고",
+      "prompt": "Rewrite this executive memo for a non-technical reader.",
+      "expect": ["adaptive-writing"],
+      "forbid": ["frontend-ideation"]
+    },
+    {
+      "id": "report-dashboard-hierarchy",
+      "source": "프론트·디자인",
+      "prompt": "리포트 대시보드 화면 구성이랑 정보 위계 제안해줘.",
+      "expect": ["frontend-ideation"],
+      "forbid": ["audit-marketing-report"]
+    },
+    {
+      "id": "landing-layout-directions",
+      "source": "프론트·디자인",
+      "prompt": "랜딩페이지 레이아웃 디자인 방향 세 개만 제안해줘.",
+      "expect": ["frontend-ideation"],
+      "forbid": ["plan-marketing-experiment"]
+    },
+    {
+      "id": "screen-states-before-figma",
+      "source": "프론트·디자인",
+      "prompt": "Figma 기획안 넘기기 전에 화면 상태별 처리 정리해줘. loading, error, disabled까지.",
+      "expect": ["frontend-ideation"],
+      "forbid": ["project-knowledge"]
+    },
+    {
+      "id": "responsive-accessibility-review",
+      "source": "프론트·디자인",
+      "prompt": "이 대시보드 반응형이랑 접근성 검토해줘.",
+      "expect": ["frontend-ideation"],
+      "forbid": ["adaptive-writing"]
+    },
+    {
+      "id": "resume-yesterday",
+      "source": "지식 연속성",
+      "prompt": "어제 하던 작업 이어서 하자. 지난번에 확정한 결정 근거부터 불러와줘.",
+      "expect": ["project-knowledge"],
+      "forbid": ["reconcile-marketing-decision"]
+    },
+    {
+      "id": "promote-to-wiki",
+      "source": "지식 연속성",
+      "prompt": "이번에 정리한 판단 기준을 위키에 승격해줘.",
+      "expect": ["project-knowledge"],
+      "forbid": ["adaptive-writing"]
+    },
+    {
+      "id": "update-now-md",
+      "source": "지식 연속성",
+      "prompt": "NOW.md 업데이트하고 진행 상태 정리해줘.",
+      "expect": ["project-knowledge"],
+      "forbid": ["reconcile-marketing-decision"]
+    },
+    {
+      "id": "find-skill-for-repeat-task",
+      "source": "하네스 운영",
+      "prompt": "이 작업 매주 반복되는데 맞는 스킬 있어?",
+      "expect": ["find-skills"],
+      "forbid": ["project-knowledge"]
+    },
+    {
+      "id": "search-skill-catalog",
+      "source": "하네스 운영",
+      "prompt": "엑셀 파싱용으로 쓸 만한 스킬 카탈로그 검색해봐.",
+      "expect": ["find-skills"],
+      "forbid": ["project-knowledge"]
+    },
+    {
+      "id": "compound-audit-then-experiment",
+      "source": "Wonder 퍼포먼스 운영",
+      "prompt": "데일리 리포트 CPA 먼저 분석하고 그 다음 소재 테스트까지 설계해줘.",
+      "expect": ["audit-marketing-report", "plan-marketing-experiment"],
+      "forbid": ["frontend-ideation", "adaptive-writing"]
+    },
+    {
+      "id": "compound-crm-then-report",
+      "source": "T'Ways 캠페인 후속",
+      "prompt": "CRM 시나리오 설계한 뒤에 그 결과를 광고주 보고용 한 페이지 문서로 요약해줘.",
+      "expect": ["design-crm-lifecycle", "adaptive-writing"],
+      "forbid": ["frontend-ideation"]
+    },
+    {
+      "id": "dev-xlsx-parser",
+      "source": "개발 작업(비스킬)",
+      "prompt": "xlsx를 표준 라이브러리만으로 파싱하는 스크립트 하나 써줘.",
+      "mode": "abstain",
+      "expect": []
+    },
+    {
+      "id": "dev-llm-refactor",
+      "source": "개발 작업(비스킬)",
+      "prompt": "Greenstore LLM 프로토타입 리팩터링부터 하자. 응답 스트리밍 붙여줘.",
+      "mode": "abstain",
+      "expect": []
+    },
+    {
+      "id": "dev-csv-encoding",
+      "source": "개발 작업(비스킬)",
+      "prompt": "이 CSV 인코딩 깨진 것 좀 고쳐줘.",
+      "mode": "abstain",
+      "expect": []
+    },
+    {
+      "id": "dev-git-history",
+      "source": "개발 작업(비스킬)",
+      "prompt": "git 커밋 메시지 다시 써서 커밋 정리해줘.",
+      "mode": "abstain",
+      "expect": []
+    },
+    {
+      "id": "dev-ci-test-report",
+      "source": "개발 작업(비스킬)",
+      "prompt": "테스트 리포트 실패한 것부터 고쳐줘.",
+      "mode": "abstain",
+      "expect": []
+    },
+    {
+      "id": "chore-meeting-count",
+      "source": "일상·잡무(비스킬)",
+      "prompt": "오늘 미팅 몇 개야?",
+      "mode": "abstain",
+      "expect": []
+    },
+    {
+      "id": "chore-lunch",
+      "source": "일상·잡무(비스킬)",
+      "prompt": "점심 뭐 먹을지 골라줘.",
+      "mode": "abstain",
+      "expect": []
+    },
+    {
+      "id": "trap-data-retention-doc",
+      "source": "일상·잡무(비스킬)",
+      "prompt": "고객 데이터 보관 정책 문서 어디 있어?",
+      "mode": "abstain",
+      "expect": []
+    },
+    {
+      "id": "trap-report-filename",
+      "source": "일상·잡무(비스킬)",
+      "prompt": "리포트 PDF 파일명 규칙만 정리해줘.",
+      "mode": "abstain",
+      "expect": []
+    },
+    {
+      "id": "chore-vacation-plan",
+      "source": "일상·잡무(비스킬)",
+      "prompt": "이번 분기 휴가 언제 쓸지 정리해줘.",
+      "mode": "abstain",
+      "expect": []
+    },
+    {
+      "id": "chore-laptop-reset",
+      "source": "일상·잡무(비스킬)",
+      "prompt": "회사 노트북 초기화 방법 알려줘.",
+      "mode": "abstain",
+      "expect": []
+    },
+    {
+      "id": "excel-formula-qa",
+      "source": "Wonder 퍼포먼스 운영",
+      "prompt": "데일리 리포트 엑셀 피벗 범위랑 수식 오류부터 확인해줘. 숫자 믿을 수 있는지 봐야 해.",
+      "expect": ["audit-marketing-report"],
+      "forbid": ["adaptive-writing", "project-knowledge"]
+    },
+    {
+      "id": "month-end-settlement",
+      "source": "Wonder 퍼포먼스 운영",
+      "prompt": "월말 마감 기준으로 매체 성과랑 예산 소진 정산해서 증액 여부 판단해줘.",
+      "expect": ["audit-marketing-report"],
+      "forbid": ["korea-marketing"]
+    },
+    {
+      "id": "sa-keyword-restructure",
+      "source": "TEAZEN 커머스·검색",
+      "prompt": "브랜드 검색 SA 키워드 구조를 효율 구간별로 재정렬하고 예산 재배분해줘.",
+      "expect": ["audit-marketing-report"],
+      "accept": ["korea-marketing"],
+      "forbid": ["frontend-ideation"]
+    },
+    {
+      "id": "rfm-scoring-gap",
+      "source": "T'Ways 캠페인 후속",
+      "prompt": "RFM 스코어링으로 CRM 공백 세그먼트 찾아서 메시지 붙여줘.",
+      "expect": ["design-crm-lifecycle"],
+      "forbid": ["audit-marketing-report"]
+    },
+    {
+      "id": "reward-attribution-split",
+      "source": "신한 예금토큰 파일럿",
+      "prompt": "외부 유입과 내부 유입 보상 귀속을 분리하는 리워드 구조 설계해줘. 전자지갑 사용 행동까지 연결해서.",
+      "expect": ["design-crm-lifecycle"],
+      "accept": ["korea-marketing", "audit-marketing-report"],
+      "forbid": ["adaptive-writing"]
+    },
+    {
+      "id": "content-seeding-twotrack",
+      "source": "Wonder 소재·메시지라인",
+      "prompt": "블로그랑 지식iN, 인플루언서 시딩 투트랙 콘텐츠 채널 전략 방향 잡아줘.",
+      "expect": ["korea-marketing"],
+      "accept": ["plan-marketing-experiment"],
+      "forbid": ["frontend-ideation"]
+    },
+    {
+      "id": "competitor-message-compare",
+      "source": "Tingle 론칭 전략",
+      "prompt": "경쟁 서비스 메시지랑 채널 운영 비교해서 우리 캠페인 전략 방향 정리해줘.",
+      "expect": ["korea-marketing"],
+      "accept": ["plan-marketing-experiment"],
+      "forbid": ["find-skills"]
+    },
+    {
+      "id": "figma-handoff-spec",
+      "source": "프론트·디자인",
+      "prompt": "매체별 사이즈 베리에이션 기준으로 화면 구성이랑 컴포넌트 구성 정리해서 핸드오프 스펙 만들어줘.",
+      "expect": ["frontend-ideation"],
+      "accept": ["plan-marketing-experiment"],
+      "forbid": ["adaptive-writing"]
+    },
+    {
+      "id": "wiki-dedupe",
+      "source": "지식 연속성",
+      "prompt": "프로젝트 위키에 중복된 결정 정리하고 중복 제거해줘.",
+      "expect": ["project-knowledge"],
+      "forbid": ["reconcile-marketing-decision"]
+    },
+    {
+      "id": "skill-duplicate-check",
+      "source": "하네스 운영",
+      "prompt": "이거 하려는데 이미 설치된 스킬하고 겹치는지 먼저 비교해줘.",
+      "expect": ["find-skills"],
+      "forbid": ["project-knowledge"]
+    },
+    {
+      "id": "en-creative-scale-decision",
+      "source": "Wonder 소재·메시지라인",
+      "prompt": "Which creative should we scale next? Two of them look efficient but have tiny volume.",
+      "expect": ["plan-marketing-experiment"],
+      "accept": ["audit-marketing-report"],
+      "forbid": ["frontend-ideation"]
+    },
+    {
+      "id": "en-lifecycle-holdout",
+      "source": "T'Ways 캠페인 후속",
+      "prompt": "Design a lifecycle message flow with suppression rules and a holdout group.",
+      "expect": ["design-crm-lifecycle"],
+      "forbid": ["plan-marketing-experiment"]
+    },
+    {
+      "id": "trap-audit-security-report",
+      "source": "개발 작업(비스킬)",
+      "prompt": "Audit the security incident report and fix what the scanner flagged.",
+      "mode": "abstain",
+      "expect": []
+    },
+    {
+      "id": "trap-packaging-material",
+      "source": "일상·잡무(비스킬)",
+      "prompt": "포장 소재 단가부터 비교해줘.",
+      "mode": "abstain",
+      "expect": []
+    },
+    {
+      "id": "trap-slack-notification",
+      "source": "일상·잡무(비스킬)",
+      "prompt": "슬랙 알림 설정 어디서 바꿔?",
+      "mode": "abstain",
+      "expect": []
+    },
+    {
+      "id": "trap-excel-macro-bug",
+      "source": "개발 작업(비스킬)",
+      "prompt": "엑셀 매크로가 실행 중에 죽어. 원인 찾아서 고쳐줘.",
+      "mode": "abstain",
+      "expect": []
+    },
+    {
+      "id": "trap-notion-permission",
+      "source": "일상·잡무(비스킬)",
+      "prompt": "노션 페이지 권한 누구한테 열어줘야 해?",
+      "mode": "abstain",
+      "expect": []
+    },
+    {
+      "id": "trap-ad-compliance-copy",
+      "source": "커버리지 공백(비스킬)",
+      "prompt": "보험 광고 유의문구랑 인증마크 표기 규정 맞는지 봐줘.",
+      "mode": "abstain",
+      "expect": []
+    },
+    {
+      "id": "trap-media-rate-negotiation",
+      "source": "커버리지 공백(비스킬)",
+      "prompt": "매체사 단가 협의 메일 회신 기한이 언제까지였지?",
+      "mode": "abstain",
+      "expect": []
+    },
+    {
+      "id": "suppression-complaint",
+      "source": "T'Ways 캠페인 후속",
+      "prompt": "suppression 조건 없이 발송해서 컴플레인 났어. 재발 방지 시나리오 만들어줘.",
+      "expect": ["design-crm-lifecycle"],
+      "forbid": ["adaptive-writing"]
+    },
+    {
+      "id": "advertiser-reply-mail",
+      "source": "대행사·광고주 커뮤니케이션",
+      "prompt": "증액은 어렵다고 광고주한테 회신할 메일 초안 써줘.",
+      "expect": ["adaptive-writing"],
+      "accept": ["audit-marketing-report", "reconcile-marketing-decision"],
+      "forbid": ["frontend-ideation"]
+    },
+    {
+      "id": "onboarding-email-sequence",
+      "source": "T'Ways 캠페인 후속",
+      "prompt": "온보딩 이메일 3통 시퀀스 설계해줘.",
+      "expect": ["design-crm-lifecycle"],
+      "forbid": ["adaptive-writing"]
+    },
+    {
+      "id": "landing-cvr-hypothesis",
+      "source": "Wonder 소재·메시지라인",
+      "prompt": "이 랜딩 전환율이 낮은 이유를 가설로 세워서 실험 설계해줘.",
+      "expect": ["plan-marketing-experiment"],
+      "accept": ["frontend-ideation"],
+      "forbid": ["adaptive-writing"]
+    },
+    {
+      "id": "teazen-search-sales-link",
+      "source": "TEAZEN 커머스·검색",
+      "prompt": "브랜드스토어 매출이랑 브랜드 검색량 흐름 같이 놓고 분석해줘.",
+      "expect": ["audit-marketing-report"],
+      "accept": ["korea-marketing"],
+      "forbid": ["frontend-ideation"]
+    },
+    {
+      "id": "owner-change-delay-risk",
+      "source": "대행사·광고주 커뮤니케이션",
+      "prompt": "인하우스 담당자가 바뀌어서 데이터 마감이랑 승인 지연 위험 정리해줘.",
+      "expect": ["reconcile-marketing-decision"],
+      "accept": ["audit-marketing-report"],
+      "forbid": ["find-skills"]
+    },
+    {
+      "id": "winning-creative-request-sheet",
+      "source": "Wonder 소재·메시지라인",
+      "prompt": "지난주 위닝 소재 기준으로 이번주 소재 제작 요청서 정리해줘.",
+      "expect": ["plan-marketing-experiment"],
+      "accept": ["adaptive-writing"],
+      "forbid": ["find-skills"]
+    },
+    {
+      "id": "trap-parking-registration",
+      "source": "일상·잡무(비스킬)",
+      "prompt": "회사 주차 등록 어떻게 해?",
+      "mode": "abstain",
+      "expect": []
+    },
+    {
+      "id": "trap-excel-recovery",
+      "source": "개발 작업(비스킬)",
+      "prompt": "엑셀 파일이 안 열려. 복구 방법 알려줘.",
+      "mode": "abstain",
+      "expect": []
+    },
+    {
+      "id": "trap-battery-swap",
+      "source": "일상·잡무(비스킬)",
+      "prompt": "노트북 배터리 교체 어디서 해?",
+      "mode": "abstain",
+      "expect": []
+    },
+    {
+      "id": "compound-report-then-mail",
+      "source": "대행사·광고주 커뮤니케이션",
+      "prompt": "데일리 리포트 소진율 먼저 진단하고 그 다음 광고주 회신 메일을 내 문체로 다듬어줘.",
+      "expect": ["audit-marketing-report", "adaptive-writing"],
+      "forbid": ["frontend-ideation", "find-skills"]
+    },
+    {
+      "id": "trap-channel-strategy-meeting",
+      "source": "일상·잡무(비스킬)",
+      "prompt": "채널 전략 회의 몇 시야?",
+      "mode": "abstain",
+      "expect": []
+    },
+    {
+      "id": "trap-resume-skill-copy",
+      "source": "일상·잡무(비스킬)",
+      "prompt": "이력서에 쓸 스킬 문구 다듬어줘.",
+      "mode": "abstain",
+      "expect": []
+    },
+    {
+      "id": "trap-game-skill-table",
+      "source": "일상·잡무(비스킬)",
+      "prompt": "게임 캐릭터 스킬 밸런스 표 만들어줘.",
+      "mode": "abstain",
+      "expect": []
+    },
+    {
+      "id": "strategy-doc-proofread",
+      "source": "문서·보고",
+      "prompt": "채널 전략 문서 오탈자만 고쳐줘.",
+      "expect": ["adaptive-writing"],
+      "forbid": ["korea-marketing"]
+    },
+    {
+      "id": "proposal-strategy-sentence-polish",
+      "source": "문서·보고",
+      "prompt": "제안서에 들어갈 캠페인 전략 문장만 다듬어줘.",
+      "expect": ["adaptive-writing"],
+      "accept": ["korea-marketing"],
+      "forbid": ["find-skills"]
+    },
+    {
+      "id": "trailing-quality-weekly",
+      "source": "Wonder 퍼포먼스 운영",
+      "prompt": "인하우스 DB 기준으로 후행 품질까지 붙여서 주간 리포트 다시 정리해줘.",
+      "expect": ["audit-marketing-report"],
+      "accept": ["adaptive-writing"],
+      "forbid": ["frontend-ideation"]
+    },
+    {
+      "id": "callcenter-attribution",
+      "source": "Wonder 퍼포먼스 운영",
+      "prompt": "콜센터 유입이랑 마케팅 성과 귀속이 겹쳐. 전환 귀속 기준 정리해줘.",
+      "expect": ["audit-marketing-report"],
+      "accept": ["reconcile-marketing-decision"],
+      "forbid": ["adaptive-writing"]
+    },
+    {
+      "id": "kakao-channel-growth",
+      "source": "T'Ways 캠페인 후속",
+      "prompt": "카카오 채널 친구 늘리고 유지하는 시나리오 설계해줘.",
+      "expect": ["design-crm-lifecycle"],
+      "accept": ["korea-marketing"],
+      "forbid": ["frontend-ideation"]
+    },
+    {
+      "id": "media-swap-decision",
+      "source": "Wonder 퍼포먼스 운영",
+      "prompt": "당근 광고 성과가 계속 나빠. 매체를 교체해야 할지 판단해줘.",
+      "expect": ["audit-marketing-report"],
+      "forbid": ["find-skills", "korea-marketing"]
+    },
+    {
+      "id": "report-version-asof",
+      "source": "지식 연속성",
+      "prompt": "월간 리포트 as-of 시각이랑 버전 기록해서 위키에 남겨줘.",
+      "expect": ["project-knowledge"],
+      "accept": ["audit-marketing-report"],
+      "forbid": ["adaptive-writing"]
+    },
+    {
+      "id": "app-onboarding-screen-flow",
+      "source": "프론트·디자인",
+      "prompt": "앱 온보딩 화면 흐름이랑 화면 상태 구성 정리해줘.",
+      "expect": ["frontend-ideation"],
+      "accept": ["design-crm-lifecycle"],
+      "forbid": ["adaptive-writing"]
+    },
+    {
+      "id": "compound-creative-then-crm",
+      "source": "Wonder 모집 퍼널 CRM",
+      "prompt": "고효율 소재로 다음 테스트 설계하고 그 다음 응시 전환용 카카오 메시지 시나리오까지 짜줘.",
+      "expect": ["plan-marketing-experiment", "design-crm-lifecycle"],
+      "forbid": ["audit-marketing-report", "korea-marketing"]
+    }
+  ]
+}
