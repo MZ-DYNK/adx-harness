@@ -58,7 +58,15 @@ PROJECT_TEMPLATES = {
 GLOBAL_TEMPLATES = {
     "PROFILE.md": "PROFILE.md",
     "DESIGN-TASTE.md": "DESIGN-TASTE.md",
+    "CANDIDATES.md": "CANDIDATES.md",
 }
+
+# 전역 파일은 짧게 유지한다. 넘으면 승격 전에 먼저 정리한다.
+GLOBAL_SIZE_LIMITS = {"PROFILE.md": 90, "DESIGN-TASTE.md": 110}
+PROMOTION_CLASSES = ("프로필", "취향", "방법론")
+MIN_OBSERVATIONS = 3
+MIN_PROJECTS = 2
+MIN_SPAN_DAYS = 7
 
 def now_local() -> datetime:
     return datetime.now().astimezone()
@@ -1374,6 +1382,169 @@ def retention_policy(project: Path, current: datetime | None = None) -> dict[str
     }
 
 
+CANDIDATE_HEADING_RE = re.compile(r"^### (.+?)\s*$", re.MULTILINE)
+CANDIDATE_FIELD_RE = re.compile(r"^- (분류|상태|사용자 명시|목표):\s*(.+?)\s*$", re.MULTILINE)
+CANDIDATE_OBSERVATION_RE = re.compile(
+    r"^- 관찰:\s*(\d{4}-\d{2}-\d{2})\s*/\s*([^/]+?)\s*/\s*(.+?)\s*$", re.MULTILINE
+)
+# 전역 지식에 절대 올라가면 안 되는 값. 있으면 게이트에서 막는다.
+FORBIDDEN_VALUE_RES = (
+    (re.compile(r"[\w.%+-]+@[\w.-]+\.[A-Za-z]{2,}"), "이메일"),
+    (re.compile(r"(?<!\d)0?1[016-9][- .]?\d{3,4}[- .]?\d{4}(?!\d)"), "휴대전화"),
+    (re.compile(r"(?<!\d)\d{6}[- ]?[1-4]\d{6}(?!\d)"), "주민등록번호 형식"),
+    (re.compile(r"(?<!\d)(?:\d{4}[- ]?){3}\d{4}(?!\d)"), "카드번호 형식"),
+    (re.compile(r"[0-9][0-9,]{4,}\s*원"), "금액"),
+    (re.compile(r"(?i)\b(?:sk|gh[pousr]|AKIA)[-_][A-Za-z0-9]{10,}"), "토큰"),
+    (re.compile(r"(?i)https?://"), "URL"),
+)
+
+
+def promotion_candidates(
+    data: Path,
+    current: datetime | None = None,
+) -> dict[str, Any]:
+    """승격 후보를 읽고 결정론적 게이트를 계산한다. 파일은 쓰지 않는다."""
+    current = current or now_local()
+    path = data.expanduser().resolve() / "global" / "CANDIDATES.md"
+    if not path.is_file():
+        return {"available": False, "candidates": [], "ready": [], "waiting": []}
+    try:
+        text = path.read_text(encoding="utf-8")
+    except OSError:
+        return {"available": False, "candidates": [], "ready": [], "waiting": []}
+
+    body = text.split("<!-- 후보 시작 -->", 1)[-1] if "<!-- 후보 시작 -->" in text else ""
+    headings = list(CANDIDATE_HEADING_RE.finditer(body))
+    candidates: list[dict[str, Any]] = []
+    for index, match in enumerate(headings):
+        end = headings[index + 1].start() if index + 1 < len(headings) else len(body)
+        block = body[match.end() : end]
+        fields = {key: value for key, value in CANDIDATE_FIELD_RE.findall(block)}
+        observations = [
+            {"date": date, "project": project.strip(), "note": note}
+            for date, project, note in CANDIDATE_OBSERVATION_RE.findall(block)
+        ]
+        candidates.append(
+            {
+                "title": match.group(1),
+                "kind": fields.get("분류", ""),
+                "state": fields.get("상태", "대기"),
+                "stated": fields.get("사용자 명시", "아니오").startswith("예"),
+                "target": fields.get("목표", ""),
+                "observations": observations,
+                "projects": sorted({item["project"] for item in observations}),
+                "block": block,
+            }
+        )
+
+    for candidate in candidates:
+        candidate["blocks"] = gate_reasons(candidate, data, current)
+        candidate["ready"] = not candidate["blocks"] and candidate["state"] == "대기"
+
+    return {
+        "available": True,
+        "path": str(path),
+        "candidates": candidates,
+        "ready": [item for item in candidates if item["ready"]],
+        "waiting": [
+            item for item in candidates if item["state"] == "대기" and not item["ready"]
+        ],
+    }
+
+
+def gate_reasons(
+    candidate: dict[str, Any],
+    data: Path,
+    current: datetime,
+) -> list[str]:
+    reasons: list[str] = []
+    if candidate["kind"] not in PROMOTION_CLASSES:
+        reasons.append(f"분류가 {' / '.join(PROMOTION_CLASSES)} 중 하나여야 합니다")
+    if not candidate["target"]:
+        reasons.append("목표 파일이 비어 있습니다")
+
+    observations = candidate["observations"]
+    if not observations:
+        reasons.append("관찰 기록이 없습니다")
+    elif not candidate["stated"]:
+        if len(observations) < MIN_OBSERVATIONS:
+            reasons.append(
+                f"관찰 {len(observations)}회. {MIN_OBSERVATIONS}회 이상 필요합니다"
+            )
+        if len(candidate["projects"]) < MIN_PROJECTS:
+            reasons.append(
+                f"프로젝트 {len(candidate['projects'])}곳. "
+                f"{MIN_PROJECTS}곳 이상에서 확인해야 합니다"
+            )
+        dates = sorted(item["date"] for item in observations)
+        try:
+            span = (
+                datetime.strptime(dates[-1], "%Y-%m-%d")
+                - datetime.strptime(dates[0], "%Y-%m-%d")
+            ).days
+        except ValueError:
+            span = 0
+            reasons.append("관찰 날짜 형식이 올바르지 않습니다")
+        if span < MIN_SPAN_DAYS:
+            reasons.append(
+                f"관찰 간격 {span}일. {MIN_SPAN_DAYS}일 이상 벌어져야 합니다"
+            )
+
+    haystack = f"{candidate['title']}\n{candidate['block']}"
+    for pattern, label in FORBIDDEN_VALUE_RES:
+        if pattern.search(haystack):
+            reasons.append(f"{label}가 포함돼 전역으로 올릴 수 없습니다")
+
+    target = candidate["target"]
+    limit = GLOBAL_SIZE_LIMITS.get(target)
+    if limit:
+        target_path = data.expanduser().resolve() / "global" / target
+        if target_path.is_file():
+            lines = len(target_path.read_text(encoding="utf-8").splitlines())
+            if lines >= limit:
+                reasons.append(
+                    f"{target}가 {lines}줄로 상한 {limit}줄에 닿았습니다. 먼저 정리하세요"
+                )
+    return reasons
+
+
+def format_promotion_review(payload: dict[str, Any]) -> str:
+    if not payload["available"]:
+        return "승격 후보 파일이 없습니다. 세션을 한 번 시작하면 생성됩니다.\n"
+    lines = ["# 전역 승격 검토", ""]
+    if not payload["candidates"]:
+        lines.append("후보가 없습니다.")
+        return "\n".join(lines) + "\n"
+
+    lines.append(
+        f"- 후보 {len(payload['candidates'])}건 · 통과 {len(payload['ready'])}건 · "
+        f"보류 {len(payload['waiting'])}건"
+    )
+    lines.append("")
+    if payload["ready"]:
+        lines += ["## 올릴 수 있는 것", ""]
+        for item in payload["ready"]:
+            lines.append(f"### {item['title']}")
+            lines.append(
+                f"- {item['kind']} → `{item['target']}`"
+                + ("  (사용자 명시)" if item["stated"] else "")
+            )
+            lines.append(
+                f"- 관찰 {len(item['observations'])}회 · "
+                f"프로젝트 {', '.join(item['projects'])}"
+            )
+            lines.append("")
+    if payload["waiting"]:
+        lines += ["## 아직 안 되는 것", ""]
+        for item in payload["waiting"]:
+            lines.append(f"### {item['title']}")
+            for reason in item["blocks"]:
+                lines.append(f"- {reason}")
+            lines.append("")
+    lines.append("승격은 사용자 승인 뒤에만 합니다. 승격하면 상태를 `승격`으로 바꾸세요.")
+    return "\n".join(lines) + "\n"
+
+
 def newest_mtime(root: Path) -> float:
     try:
         return max(
@@ -1511,6 +1682,18 @@ def doctor(
             path = global_root / name
             if path.is_file() and (path.stat().st_mode & 0o777) != 0o600:
                 errors.append(f"Global profile file mode must be 0600: {path}")
+        for name, limit in GLOBAL_SIZE_LIMITS.items():
+            path = global_root / name
+            if not path.is_file():
+                continue
+            lines_used = len(path.read_text(encoding="utf-8").splitlines())
+            if lines_used > limit:
+                errors.append(
+                    f"Global file exceeds its line budget: {name} "
+                    f"{lines_used}/{limit}. 정리한 뒤 승격하세요"
+                )
+            else:
+                checks.append(f"OK global size: {name} {lines_used}/{limit} lines")
     else:
         checks.append(f"INFO global profile store will initialize on SessionStart: {global_root}")
 
@@ -1665,6 +1848,12 @@ def status(project: Path, data: Path, templates: Path) -> tuple[str, int]:
         lines.append(f"  보존       다음 재검토 {retention['next_review']}")
     elif retention["available"]:
         lines.append(f"  보존       {len(retention['tiers'])}계층 기록됨")
+    promotion = promotion_candidates(data)
+    if promotion["available"] and (promotion["ready"] or promotion["waiting"]):
+        lines.append(
+            f"  승격       통과 {len(promotion['ready'])}건 · "
+            f"보류 {len(promotion['waiting'])}건"
+        )
     if today["needs_review"]:
         lines.append(f"  확인       라우팅 불일치 {len(today['needs_review'])}건")
     if errors:
@@ -1698,6 +1887,7 @@ def parser() -> argparse.ArgumentParser:
             "skills",
             "status",
             "digest",
+            "promote",
             "session-end",
         ),
     )
@@ -1781,6 +1971,11 @@ def main() -> int:
             text, code = status(project, data, templates)
             print(text)
             return code
+
+        if args.command == "promote":
+            initialize_global(data, templates)
+            print(format_promotion_review(promotion_candidates(data)))
+            return 0
 
         if args.command == "digest":
             initialize_project(project, templates)

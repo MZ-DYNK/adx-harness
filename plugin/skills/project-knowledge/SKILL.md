@@ -81,3 +81,27 @@ For a small answer with no durable change, write nothing beyond the automatic lo
 - Do not convert every observation into a rule or skill.
 - Split a canonical file only when it becomes hard to scan, not preemptively.
 - Keep one canonical home per fact set and link rather than copy.
+
+## 전역 승격
+
+프로젝트 지식 중 일부만 전역으로 올립니다. 목적지가 세 개이고 서로 다릅니다.
+
+| 분류 | 올라가는 곳 | 무엇이 |
+|---|---|---|
+| 프로필 | `PROFILE.md` | 사람에 관한 사실. 역할, 응답 선호, 일하는 방식 |
+| 취향 | `DESIGN-TASTE.md` | 미감. 색, 타이포, 레이아웃, 구성 선호 |
+| 방법론 | 해당 스킬의 레퍼런스 | 프로젝트를 넘어 재사용할 판단 규칙 |
+
+프로젝트 고유 사실, 클라이언트 수치, 계약·시점에 묶인 정보는 올리지 않습니다.
+그것은 프로젝트 정본이나 `imports` 에 남습니다. 한 프로젝트의 제약을 사람의
+취향으로 일반화하지 않습니다.
+
+관찰이 생기면 바로 올리지 않고 `CANDIDATES.md` 에 후보로 적습니다. 형식과
+게이트는 그 파일에 있습니다. `./harness promote` 가 통과 여부를 계산하고,
+승격은 사용자 승인 뒤에만 합니다.
+
+게이트를 우회하려고 관찰 날짜나 프로젝트 이름을 바꾸지 않습니다. 통과하지
+못하면 그대로 두고 다음 기회를 기다립니다.
+
+승격한 뒤에는 후보의 상태를 `승격` 으로 바꾸고, 프로젝트 정본에는 전역으로
+갔다는 사실만 한 줄 남깁니다. 같은 내용을 두 곳에 쓰지 않습니다.
