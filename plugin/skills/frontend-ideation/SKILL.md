@@ -62,6 +62,12 @@ After explicit feedback:
 - Mark ideas as `adopted`, `held`, or `rejected` with the reason.
 - Preserve the reason and use condition, not only a screenshot or link.
 
+## Copy
+
+Decide layout, hierarchy, and state here. When the actual Korean strings matter,
+hand them to the ux-writing skill rather than drafting them inline. State the
+component, the user's situation, and the single next action it must produce.
+
 ## Quality gate
 
 - The first viewport communicates the product and primary action.

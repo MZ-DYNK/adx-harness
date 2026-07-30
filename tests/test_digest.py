@@ -149,8 +149,9 @@ class DigestTests(unittest.TestCase):
 
         text, code = HARNESS.status(self.project, self.data, self.templates)
 
+        installed = len(list((PLUGIN / "skills").glob("*/SKILL.md")))
         self.assertIn("ADX Harness · 상태", text)
-        self.assertIn("스킬       9개", text)
+        self.assertIn(f"스킬       {installed}개", text)
         self.assertIn(0, (code, 0))
 
     def test_plugin_install_state_never_raises(self) -> None:

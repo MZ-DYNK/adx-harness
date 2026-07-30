@@ -235,6 +235,7 @@ Skill 호출 이름만 집계합니다.
 - `reconcile-marketing-decision`: 광고주·인하우스·대행사 의견을 결정과 책임으로 정리
 - `korea-marketing`: 한국 시장 STP, GTM, 포지셔닝, 채널·캠페인 전략
 - `frontend-ideation`: 화면·레이아웃·컴포넌트·상태의 디자인 방향
+- `ux-writing`: 버튼·토스트·에러·빈 상태 등 화면 안 한국어 문구와 어체
 - `adaptive-writing`: 명시적인 문서 작성·교정·요약·번역
 - `project-knowledge`: 이전 결정 회수, 위키 승격, 지식 구조 정리
 

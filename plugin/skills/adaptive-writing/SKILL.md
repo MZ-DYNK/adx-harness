@@ -35,6 +35,10 @@ profile only when the user asks or the evidence is stable.
 For Markdown creation or substantial editing, read
 [references/markdown-rules.md](references/markdown-rules.md).
 
+Strings that live inside a screen (button labels, toasts, error messages, empty
+states, form helpers) are interface parts, not prose. Use the ux-writing skill
+for those.
+
 ## Task formats
 
 ### Review

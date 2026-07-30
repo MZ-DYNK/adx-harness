@@ -690,6 +690,77 @@
       "prompt": "고효율 소재로 다음 테스트 설계하고 그 다음 응시 전환용 카카오 메시지 시나리오까지 짜줘.",
       "expect": ["plan-marketing-experiment", "design-crm-lifecycle"],
       "forbid": ["audit-marketing-report", "korea-marketing"]
+    },
+    {
+      "id": "button-and-toast-copy",
+      "source": "프론트·디자인",
+      "prompt": "저장 버튼 문구랑 실패했을 때 토스트 문구 다듬어줘.",
+      "expect": ["ux-writing"],
+      "forbid": ["adaptive-writing", "frontend-ideation"]
+    },
+    {
+      "id": "error-message-set",
+      "source": "프론트·디자인",
+      "prompt": "결제 실패 에러 메시지를 원인이랑 복구 방법 같이 주도록 고쳐줘.",
+      "expect": ["ux-writing"],
+      "forbid": ["adaptive-writing"]
+    },
+    {
+      "id": "empty-state-copy",
+      "source": "프론트·디자인",
+      "prompt": "리스트 빈 상태 문구랑 CTA 라벨 만들어줘.",
+      "expect": ["ux-writing"],
+      "forbid": ["frontend-ideation"]
+    },
+    {
+      "id": "remove-ai-tone",
+      "source": "프론트·디자인",
+      "prompt": "이 화면 안내 문구에서 AI 말투 좀 빼고 어체 통일해줘.",
+      "expect": ["ux-writing"],
+      "forbid": ["adaptive-writing"]
+    },
+    {
+      "id": "form-helper-placeholder",
+      "source": "프론트·디자인",
+      "prompt": "가입 폼 플레이스홀더랑 헬퍼 텍스트 문구 정리해줘.",
+      "expect": ["ux-writing"],
+      "forbid": ["design-crm-lifecycle"]
+    },
+    {
+      "id": "ux-writing-guide-request",
+      "source": "하네스 운영",
+      "prompt": "우리 제품 UX 라이팅 규칙을 만들어줘.",
+      "expect": ["ux-writing"],
+      "accept": ["project-knowledge"],
+      "forbid": ["find-skills"]
+    },
+    {
+      "id": "boundary-layout-not-copy",
+      "source": "프론트·디자인",
+      "prompt": "대시보드 정보 위계랑 레이아웃 방향 제안해줘.",
+      "expect": ["frontend-ideation"],
+      "forbid": ["ux-writing"]
+    },
+    {
+      "id": "boundary-prose-not-copy",
+      "source": "문서·보고",
+      "prompt": "제안서 초안 오탈자랑 톤 교정해줘. 문서 전체 흐름도 봐줘.",
+      "expect": ["adaptive-writing"],
+      "forbid": ["ux-writing"]
+    },
+    {
+      "id": "trap-error-handling",
+      "source": "개발 작업(비스킬)",
+      "prompt": "결제 모듈 예외 처리랑 에러 로그 레벨 정리해줘.",
+      "mode": "abstain",
+      "expect": []
+    },
+    {
+      "id": "trap-commit-message",
+      "source": "개발 작업(비스킬)",
+      "prompt": "커밋 메시지 문구 규칙 정해줘.",
+      "mode": "abstain",
+      "expect": []
     }
   ]
 }
