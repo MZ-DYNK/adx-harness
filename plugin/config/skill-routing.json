@@ -839,6 +839,72 @@
         ["wiki", "update"]
       ],
       "negative": []
+    },
+    {
+      "skill": "pptpdf",
+      "priority": 85,
+      "actions": [
+        "변환",
+        "내보내",
+        "뽑아",
+        "저장",
+        "convert",
+        "export"
+      ],
+      "objects": [
+        "ppt",
+        "pptx",
+        "파워포인트",
+        "powerpoint",
+        "발표자료",
+        "슬라이드",
+        "presentation",
+        "slide deck"
+      ],
+      "strong_phrases": [
+        "ppt를 pdf",
+        "pptx를 pdf",
+        "ppt to pdf",
+        "pptx to pdf",
+        "파워포인트를 pdf",
+        "발표자료를 pdf",
+        "ppt pdf 변환",
+        "pptx pdf 변환",
+        "ppt pdf로 뽑아",
+        "슬라이드를 pdf로",
+        "고용량 ppt",
+        "convert to pdf",
+        "export to pdf",
+        "export as pdf"
+      ],
+      "unique": [
+        "pptx",
+        ".pptx",
+        ".ppt",
+        "파워포인트를 pdf"
+      ],
+      "pairs": [
+        ["ppt", "pdf"],
+        ["pptx", "pdf"],
+        ["파워포인트", "pdf"],
+        ["발표자료", "pdf"],
+        ["슬라이드", "pdf"],
+        ["제안서", "pdf"],
+        ["presentation", "pdf"]
+      ],
+      "negative": [
+        "pdf 파일명",
+        "pdf에서 텍스트",
+        "pdf에서 표",
+        "extract text from pdf",
+        "extract table from pdf",
+        "pdf 읽어",
+        "pdf 요약",
+        "summarize this pdf",
+        "pdf merge",
+        "pdf 병합",
+        "pdf 압축"
+      ]
     }
   ]
 }

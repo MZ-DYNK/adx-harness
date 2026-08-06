@@ -7,6 +7,7 @@
 
 - [지식 시스템 구조 결정](wiki/decisions/knowledge-system.md)
 - [외부 스킬 도입 정책](wiki/decisions/external-skill-policy.md)
+- [ppt/pptx → PDF 변환 방식](wiki/decisions/pptpdf-conversion-approach.md)
 - [턴별 스킬 라우팅](wiki/playbooks/skill-routing.md)
 
 ## 핵심 사실

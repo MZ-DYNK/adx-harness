@@ -1,0 +1,4 @@
+interface:
+  display_name: "PPT to PDF"
+  short_description: "Convert ppt/pptx to high-fidelity PDF via PowerPoint"
+  default_prompt: "Use $pptpdf to convert this presentation to a high-quality PDF."

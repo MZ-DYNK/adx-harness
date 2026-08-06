@@ -238,6 +238,7 @@ Skill 호출 이름만 집계합니다.
 - `ux-writing`: 버튼·토스트·에러·빈 상태 등 화면 안 한국어 문구와 어체
 - `adaptive-writing`: 명시적인 문서 작성·교정·요약·번역
 - `project-knowledge`: 이전 결정 회수, 위키 승격, 지식 구조 정리
+- `pptpdf`: ppt/pptx를 PowerPoint 자체 엔진으로 고화질 PDF로 변환, 폰트 사전 점검
 
 라우터는 다음처럼 단독 점검할 수 있습니다.
 

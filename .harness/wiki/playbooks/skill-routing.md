@@ -1,7 +1,7 @@
 # 턴별 스킬 라우팅
 
 - 상태: 적용 중
-- 마지막 갱신: 2026-07-29
+- 마지막 갱신: 2026-08-06
 - 정본 구현: `config/skill-routing.json`, `scripts/skill_router.py`
 
 ## 목적
@@ -33,6 +33,7 @@
 | UI 방향·레이아웃·컴포넌트 | `frontend-ideation` |
 | 명시적인 문서 작성·교정 | `adaptive-writing` |
 | 이전 결정 회수·위키 관리 | `project-knowledge` |
+| ppt/pptx를 PDF로 변환 | `pptpdf` |
 
 ## 오탐 방지 원칙
 

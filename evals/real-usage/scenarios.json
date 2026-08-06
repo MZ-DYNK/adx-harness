@@ -749,6 +749,19 @@
       "forbid": ["ux-writing"]
     },
     {
+      "id": "wonder-proposal-deck-to-pdf",
+      "source": "문서·보고",
+      "prompt": "원더 제안서 폴더에 있는 pptx들 전부 고화질 PDF로 바꿔줘. 폰트 깨지면 안 돼.",
+      "expect": ["pptpdf"],
+      "forbid": ["adaptive-writing"]
+    },
+    {
+      "id": "pptx-batch-pdf-korean-fonts",
+      "source": "문서·보고",
+      "prompt": "고용량 pptx 여러 개를 폴더째로 PDF로 뽑아야 하는데 한글 폰트 깨지지 않게 변환해줘.",
+      "expect": ["pptpdf"]
+    },
+    {
       "id": "trap-error-handling",
       "source": "개발 작업(비스킬)",
       "prompt": "결제 모듈 예외 처리랑 에러 로그 레벨 정리해줘.",

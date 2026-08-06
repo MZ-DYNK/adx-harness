@@ -112,6 +112,18 @@ class SkillRouterTests(unittest.TestCase):
                 "다음에 어떤 광고 소재를 만들어야 할까?",
                 "plan-marketing-experiment",
             ),
+            (
+                "이 pptx 파일 고화질 PDF로 변환해줘",
+                "pptpdf",
+            ),
+            (
+                "발표자료 폴더에 있는 ppt 전부 PDF로 뽑아줘",
+                "pptpdf",
+            ),
+            (
+                "Convert this pptx deck to a high-quality PDF.",
+                "pptpdf",
+            ),
         )
 
         for prompt, expected in cases:
@@ -143,6 +155,9 @@ class SkillRouterTests(unittest.TestCase):
             "이 스킬에 섹션을 추가해줘.",
             "Add examples to this skill.",
             "Add a section to the skill.",
+            "이 PDF에서 표를 추출해줘.",
+            "이 PDF 요약해줘.",
+            "Summarize this PDF report for me.",
         )
 
         for prompt in prompts:
